@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-export function useGameState() {
+function useGameState() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -54,7 +54,7 @@ export function useGameState() {
   };
 }
 
-export function useParticles() {
+function useParticles() {
   const particles = useRef<
     {
       x: number;
@@ -142,7 +142,7 @@ export function useParticles() {
   };
 }
 
-export function useClouds(canvasWidth: number) {
+function useClouds(canvasWidth: number) {
   const clouds = useRef<
     { x: number; y: number; width: number; speed: number }[]
   >([]);
@@ -177,7 +177,7 @@ export function useClouds(canvasWidth: number) {
   };
 }
 
-export function useTheme() {
+function useTheme() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const lightThemeBackgrounds = [
@@ -313,7 +313,7 @@ interface UseDinoReturn {
   reset: () => void;
 }
 
-export function useDino(createJumpParticles: () => void): UseDinoReturn {
+function useDino(createJumpParticles: () => void): UseDinoReturn {
   const dino = useRef<DinoState>({
     x: 80,
     y: 150,
@@ -395,7 +395,7 @@ export function useDino(createJumpParticles: () => void): UseDinoReturn {
   };
 }
 
-export function useObstacles(canvasWidth: number) {
+function useObstacles(canvasWidth: number) {
   const obstacles = useRef<Obstacle[]>([]);
   const obstacleTypes = useRef<number[]>([]);
   const obstacleFrequency = 90;
@@ -496,7 +496,7 @@ export function useObstacles(canvasWidth: number) {
   };
 }
 
-export function useControls({
+function useControls({
   dino,
   gameState,
   toggleTheme,
@@ -558,7 +558,7 @@ interface GameHeaderProps {
   isDarkTheme: boolean;
 }
 
-export const GameHeader: React.FC<GameHeaderProps> = ({
+const GameHeader: React.FC<GameHeaderProps> = ({
   score,
   highScore,
   isDarkTheme,
@@ -597,7 +597,7 @@ interface GameOverModalProps {
   isDarkTheme: boolean;
 }
 
-export const GameOverModal: React.FC<GameOverModalProps> = ({
+const GameOverModal: React.FC<GameOverModalProps> = ({
   score,
   highScore,
   onRestart,
@@ -641,7 +641,7 @@ interface GameControlsProps {
   isDarkTheme: boolean;
 }
 
-export const GameControls: React.FC<GameControlsProps> = ({ isDarkTheme }) => {
+const GameControls: React.FC<GameControlsProps> = ({ isDarkTheme }) => {
   return (
     <div
       className={`${
@@ -695,44 +695,44 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   );
 };
 
-interface GameCanvasProps {
-  canvasRef: React.RefObject<HTMLCanvasElement>;
-  width: number;
-  height: number;
-  onTouchStart: (e: TouchEvent) => void;
-  onTouchEnd: () => void;
-}
+// interface GameCanvasProps {
+//   canvasRef: React.RefObject<HTMLCanvasElement>;
+//   width: number;
+//   height: number;
+//   onTouchStart: (e: TouchEvent) => void;
+//   onTouchEnd: () => void;
+// }
 
-export const GameCanvas: React.FC<GameCanvasProps> = ({
-  canvasRef,
-  width,
-  height,
-  onTouchStart,
-  onTouchEnd,
-}) => {
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+// const GameCanvas: React.FC<GameCanvasProps> = ({
+//   canvasRef,
+//   width,
+//   height,
+//   onTouchStart,
+//   onTouchEnd,
+// }) => {
+//   useEffect(() => {
+//     const canvas = canvasRef.current;
+//     if (!canvas) return;
 
-    canvas.addEventListener("touchstart", onTouchStart);
-    canvas.addEventListener("touchend", onTouchEnd);
+//     canvas.addEventListener("touchstart", onTouchStart);
+//     canvas.addEventListener("touchend", onTouchEnd);
 
-    return () => {
-      canvas.removeEventListener("touchstart", onTouchStart);
-      canvas.removeEventListener("touchend", onTouchEnd);
-    };
-  }, [canvasRef, onTouchStart, onTouchEnd]);
+//     return () => {
+//       canvas.removeEventListener("touchstart", onTouchStart);
+//       canvas.removeEventListener("touchend", onTouchEnd);
+//     };
+//   }, [canvasRef, onTouchStart, onTouchEnd]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      width={width}
-      height={height}
-      className="block w-full h-[200px]"
-      aria-label="Dino Runner Game Canvas"
-    />
-  );
-};
+//   return (
+//     <canvas
+//       ref={canvasRef}
+//       width={width}
+//       height={height}
+//       className="block w-full h-[200px]"
+//       aria-label="Dino Runner Game Canvas"
+//     />
+//   );
+// };
 
 interface DinoState {
   x: number;
@@ -789,7 +789,7 @@ interface Canvas {
   height: number;
 }
 
-export const drawUtils = {
+const drawUtils = {
   drawDino: (
     ctx: CanvasRenderingContext2D,
     dino: DinoState,
