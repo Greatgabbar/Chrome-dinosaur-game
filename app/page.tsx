@@ -1,6 +1,5 @@
 "use client";
 
-// hooks/useGameState.tsx
 import { useState, useEffect, useRef } from "react";
 
 export function useGameState() {
@@ -143,8 +142,6 @@ export function useParticles() {
   };
 }
 
-// hooks/useClouds.tsx
-
 export function useClouds(canvasWidth: number) {
   const clouds = useRef<
     { x: number; y: number; width: number; speed: number }[]
@@ -179,8 +176,6 @@ export function useClouds(canvasWidth: number) {
     updateClouds,
   };
 }
-
-// hooks/useTheme.tsx
 
 export function useTheme() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -268,7 +263,6 @@ export function useTheme() {
     return isDarkTheme ? darkThemeBackgrounds : lightThemeBackgrounds;
   };
 
-  // Load saved theme preference
   useEffect(() => {
     const savedTheme = localStorage.getItem("dinoGameTheme");
     if (savedTheme) {
@@ -281,7 +275,6 @@ export function useTheme() {
     }
   }, []);
 
-  // Save theme preference on change
   useEffect(() => {
     localStorage.setItem("dinoGameTheme", isDarkTheme ? "dark" : "light");
   }, [isDarkTheme]);
@@ -293,8 +286,6 @@ export function useTheme() {
     getCurrentBackgrounds,
   };
 }
-
-// hooks/useDino.tsx
 
 interface DinoState {
   x: number;
@@ -404,8 +395,6 @@ export function useDino(createJumpParticles: () => void): UseDinoReturn {
   };
 }
 
-// hooks/useObstacles.tsx
-
 export function useObstacles(canvasWidth: number) {
   const obstacles = useRef<Obstacle[]>([]);
   const obstacleTypes = useRef<number[]>([]);
@@ -461,7 +450,6 @@ export function useObstacles(canvasWidth: number) {
     obstacles.current.forEach((obstacle, index) => {
       obstacle.x -= gameSpeed;
 
-      // Check collisions
       const dinoHitbox: Hitbox = {
         x: dinoRef.current.x + 5,
         y: dinoRef.current.y + 5,
@@ -486,7 +474,6 @@ export function useObstacles(canvasWidth: number) {
         onCollision();
       }
 
-      // Remove obstacles that have gone off screen
       if (obstacle.x + obstacle.width < 0) {
         obstacles.current.splice(index, 1);
         obstacleTypes.current.splice(index, 1);
@@ -509,8 +496,6 @@ export function useObstacles(canvasWidth: number) {
   };
 }
 
-// hooks/useControls.tsx
-
 export function useControls({
   dino,
   gameState,
@@ -527,7 +512,6 @@ export function useControls({
     }
 
     const handleKeyDown = (e: HandleKeyDownParams): void => {
-      // Start game with any key if not playing
       if (!gameState.isPlaying && !gameState.gameOver) {
         gameState.startGame();
         return;
@@ -568,8 +552,6 @@ export function useControls({
   return {};
 }
 
-// components/GameHeader.tsx
-
 interface GameHeaderProps {
   score: number;
   highScore: number;
@@ -607,8 +589,6 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
     </div>
   );
 };
-
-// components/GameOverModal.tsx
 
 interface GameOverModalProps {
   score: number;
@@ -655,7 +635,6 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   );
 };
 
-// components/GameControls.tsx
 import React from "react";
 
 interface GameControlsProps {
@@ -689,7 +668,6 @@ export const GameControls: React.FC<GameControlsProps> = ({ isDarkTheme }) => {
   );
 };
 
-// Helper component for GameControls
 interface ControlButtonProps {
   label: string;
   symbol: string;
@@ -716,8 +694,6 @@ const ControlButton: React.FC<ControlButtonProps> = ({
     </div>
   );
 };
-
-// components/GameCanvas.tsx
 
 interface GameCanvasProps {
   canvasRef: React.RefObject<HTMLCanvasElement>;
@@ -758,7 +734,6 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
   );
 };
 
-// Drawing utilities
 interface DinoState {
   x: number;
   y: number;
