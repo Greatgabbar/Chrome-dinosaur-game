@@ -1047,42 +1047,42 @@ export default function Home() {
   }, []);
 
   // Handle touch controls
-  const handleTouchStart = (e: TouchEvent) => {
-    if (!gameState.isPlaying && !gameState.gameOver) {
-      gameState.startGame();
-      return;
-    }
+  // const handleTouchStart = (e: TouchEvent) => {
+  //   if (!gameState.isPlaying && !gameState.gameOver) {
+  //     gameState.startGame();
+  //     return;
+  //   }
 
-    if (gameState.gameOver) {
-      handleRestart();
-      return;
-    }
+  //   if (gameState.gameOver) {
+  //     handleRestart();
+  //     return;
+  //   }
 
-    const touch = e.touches[0];
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  //   const touch = e.touches[0];
+  //   const canvas = canvasRef.current;
+  //   if (!canvas) return;
 
-    if (
-      touch.clientY <
-      canvas.getBoundingClientRect().top + canvas.height / 2
-    ) {
-      dinoController.jump();
-    } else {
-      dinoController.crouch();
-    }
-  };
+  //   if (
+  //     touch.clientY <
+  //     canvas.getBoundingClientRect().top + canvas.height / 2
+  //   ) {
+  //     dinoController.jump();
+  //   } else {
+  //     dinoController.crouch();
+  //   }
+  // };
 
-  const handleTouchEnd = () => {
-    dinoController.standUp();
-  };
+  // const handleTouchEnd = () => {
+  //   dinoController.standUp();
+  // };
 
-  // Handle restart
-  const handleRestart = () => {
-    gameState.resetGame();
-    dinoController.reset();
-    obstacleController.reset();
-    particleSystem.reset();
-  };
+  // // Handle restart
+  // const handleRestart = () => {
+  //   gameState.resetGame();
+  //   dinoController.reset();
+  //   obstacleController.reset();
+  //   particleSystem.reset();
+  // };
 
   // Game loop
   useEffect(() => {
