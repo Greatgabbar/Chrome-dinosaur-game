@@ -572,7 +572,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({
       } px-6 py-4 flex justify-between items-center transition-colors duration-300`}
     >
       <h1 className="text-3xl font-bold text-white tracking-wider">
-        DINO RUNNER my version
+        DINO RUNNER conflict-nour
       </h1>
       <div className="flex space-x-4">
         <div className="bg-white bg-opacity-20 rounded-lg px-4 py-2">
